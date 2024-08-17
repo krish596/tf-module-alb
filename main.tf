@@ -4,11 +4,7 @@ resource "aws_lb" "main" {
   load_balancer_type = var.lb_type
   security_groups    = [aws_security_group.main.id]
   subnets            = var.subnets
-
-
-  tags = {
-    Environment = "production"
-  }
+  tags = merge(local.tags, {Name = "${var.env}-alb"})
 }
 
 resource "aws_security_group" "main" {
@@ -16,9 +12,7 @@ resource "aws_security_group" "main" {
   description = "${var.env}-alb-sg"
   vpc_id      = var.vpc_id
 
-  tags = {
-    Name = "allow_tls"
-  }
+  tags = merge(local.tags, {Name = "${var.env}-alb-sg"})
 
   ingress {
     description      = "APP"
