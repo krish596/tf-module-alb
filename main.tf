@@ -1,5 +1,5 @@
 resource "aws_lb" "main" {
-  name               = "${var.env}-lb"
+  name               = "${var.env}-alb"
   internal           = var.internal
   load_balancer_type = var.lb_type
   security_groups    = [aws_security_group.main.id]
@@ -9,10 +9,10 @@ resource "aws_lb" "main" {
 }
 
 resource "aws_security_group" "main" {
-  name        = "${var.env}-sg"
-  description     = "${var.env}-sg"
+  name        = "${var.env}-alb-sg"
+  description     = "${var.env}-alb-sg"
   vpc_id      = var.vpc_id
-  tags = merge(local.tags, {Name = "${var.env}-sg"})
+  tags = merge(local.tags, {Name = "${var.env}-alb-sg"})
 
 
   ingress {
