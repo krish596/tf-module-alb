@@ -25,22 +25,7 @@ resource "aws_lb_listener" "main" {
   }
 }
 
-resource "aws_lb_listener" "main" {
-  count = var.internal ? 0 : 1
-  load_balancer_arn = aws_lb.main.arn
-  port              = "80"
-  protocol          = "HTTP"
 
-  default_action {
-    type = "redirect"
-
-    redirect {
-      port        = "443"
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
 
 resource "aws_security_group" "main" {
   name        = local.sg_name
