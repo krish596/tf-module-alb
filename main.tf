@@ -10,7 +10,7 @@ resource "aws_lb" "main" {
 resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_lb.main.arn
   port              = var.internal ? 80 : 443
-  protocol          = var.internal ? HTTP : HTTPS
+  protocol          = var.internal ? "HTTP" : "HTTPS"
   ssl_policy        = var.internal ? null : "ELBSecurityPolicy-2016-08"
   acm_certificate_arn = var.internal ? null : var.acm_certificate_arn
 
