@@ -68,6 +68,7 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_security_group_rule" "frontend" {
+  count = var.internal ? 0 : 1
   type              = "ingress"
   from_port         = 80
   to_port           = 80
